@@ -68,10 +68,10 @@ function custom_build_prompt {
     local yellow_on_white="%K{white}%F{yellow}"
     local red_on_white="%K{white}%F{red}"
     local red_on_black="%K{black}%F{red}"
-    local black_on_red="%K{red}%F{black}"
-    local white_on_red="%K{red}%F{white}"
-    local yellow_on_red="%K{red}%F{yellow}"
- 
+    local black_on_red="%K{blue}%F{black}"
+    local white_on_red="%K{blue}%F{white}"
+    local yellow_on_red="%K{blue}%F{yellow}"
+
     # Flags
     local omg_default_color_on="${black_on_white}"
 
@@ -86,13 +86,13 @@ function custom_build_prompt {
         prompt+=$(enrich_append $has_untracked_files $omg_has_untracked_files_symbol "${red_on_white}")
         prompt+=$(enrich_append $has_modifications $omg_has_modifications_symbol "${red_on_white}")
         prompt+=$(enrich_append $has_deletions $omg_has_deletions_symbol "${red_on_white}")
-        
+
 
         # ready
         prompt+=$(enrich_append $has_adds $omg_has_adds_symbol "${black_on_white}")
         prompt+=$(enrich_append $has_modifications_cached $omg_has_cached_modifications_symbol "${black_on_white}")
         prompt+=$(enrich_append $has_deletions_cached $omg_has_cached_deletions_symbol "${black_on_white}")
-        
+
         # next operation
 
         prompt+=$(enrich_append $ready_to_commit $omg_ready_to_commit_symbol "${red_on_white}")
@@ -104,7 +104,7 @@ function custom_build_prompt {
         if [[ $detached == true ]]; then
             prompt+=$(enrich_append $detached $omg_detached_symbol "${white_on_red}")
             prompt+=$(enrich_append $detached "(${current_commit_hash:0:7})" "${black_on_red}")
-        else            
+        else
             if [[ $has_upstream == false ]]; then
                 prompt+=$(enrich_append true "-- ${omg_not_tracked_branch_symbol}  --  (${current_branch})" "${black_on_red}")
             else
@@ -126,7 +126,7 @@ function custom_build_prompt {
                     if [[ $commits_ahead == 0 && $commits_behind == 0 ]]; then
                          prompt+=$(enrich_append true " --   -- " "${black_on_red}")
                     fi
-                    
+
                 fi
                 prompt+=$(enrich_append true "(${current_branch} ${type_of_upstream} ${upstream//\/$current_branch/})" "${black_on_red}")
             fi
@@ -137,6 +137,6 @@ ${omg_second_line}"
     else
         prompt="${omg_ungit_prompt}"
     fi
- 
+
     echo "${prompt}"
 }
