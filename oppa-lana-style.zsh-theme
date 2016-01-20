@@ -132,7 +132,7 @@ function custom_build_prompt {
             fi
         fi
         prompt+=$(enrich_append ${is_on_a_tag} "${omg_is_on_a_tag_symbol} ${tag_at_current_commit}" "${black_on_red}")
-        prompt+="%k%F{red}%k%f
+        prompt+="%k%F{blue}%k%f
 ${omg_second_line}"
     else
         prompt="${omg_ungit_prompt}"
